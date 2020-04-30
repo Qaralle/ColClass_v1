@@ -22,6 +22,8 @@ public class Person implements Comparable<Person>, Serializable {
     private Country nationality; //Поле может быть null
     public Location location; //Поле может быть null
 
+    private String creator;
+
 
     public void setID(long id) {
         this.id = id;
@@ -81,6 +83,10 @@ public class Person implements Comparable<Person>, Serializable {
     public  void setLocation( Location o1){
         this.location=o1;
     }
+
+    public String getCreator() { return creator; }
+
+    public void setCreator(String creator) { this.creator = creator; }
 
     /**
      * Установка всех полей

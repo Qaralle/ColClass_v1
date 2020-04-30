@@ -242,5 +242,6 @@ public class CommandA implements Serializable {
     public String getFileName(){
         return command_key+"="+"file_name"+"="+file_name;
     }
+    public void setLogin(String str) {this.login = str;}
 
 }
