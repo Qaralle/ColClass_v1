@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Scanner;
 
+/**
+ * Класс, реализующий шаблон команды, которая будет использоваться для взаиможействия клиента с коллекцией на сервере
+ */
 public class CommandA implements Serializable {
     private String command_key;
     private long id;
@@ -63,6 +66,10 @@ public class CommandA implements Serializable {
         this.ACCESS=ACCESS_;
     }
 
+    /**
+     * Заполнение необходимых полей для команды
+     * @param scan Сканнер для считываения полей с командной строки
+     */
     public void setFields(Scanner scan) throws WrongTypeOfFieldException {
 
 
