@@ -1,5 +1,7 @@
 package packet;
 
+import javafx.beans.property.*;
+
 import java.io.Serializable;
 
 /**
@@ -43,12 +45,26 @@ public class Location implements Comparable<Location>, Serializable {
     public void SetX(Float x_){
         this.x=x_;
     }
-
     public void SetY(double y_){
         this.y=y_;
     }
-
     public void SetName(String name_){
         this.name=name_;
+    }
+
+    public StringProperty getPropName(){
+        StringProperty propName = new SimpleStringProperty();
+        propName.setValue(name);
+        return propName;
+    }
+    public FloatProperty getPropX(){
+        FloatProperty propX = new SimpleFloatProperty();
+        propX.setValue(x);
+        return propX;
+    }
+    public DoubleProperty getPropY(){
+        DoubleProperty propY = new SimpleDoubleProperty();
+        propY.setValue(y);
+        return propY;
     }
 }

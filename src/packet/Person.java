@@ -1,5 +1,9 @@
 package packet;
 
+import javafx.beans.Observable;
+import javafx.beans.property.*;
+import javafx.beans.value.ObservableValue;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -21,6 +25,7 @@ public class Person implements Comparable<Person>, Serializable {
     private Color hairColor; //Поле не может быть null
     private Country nationality; //Поле может быть null
     public Location location; //Поле может быть null
+
 
     private String creator;
 
@@ -60,6 +65,43 @@ public class Person implements Comparable<Person>, Serializable {
     public  Location getLocation(){
         return location;
     }
+
+    public LongProperty getPropID(){
+        LongProperty propID = new SimpleLongProperty();
+        propID.setValue(id);
+        return propID;
+    }
+    public StringProperty getPropName(){
+        StringProperty propName = new SimpleStringProperty();
+        propName.setValue(name);
+        return propName;
+    }
+    public StringProperty getPropEyeColor(){
+        StringProperty propEyeColor = new SimpleStringProperty();
+        propEyeColor.setValue(eyeColor.toString());
+        return propEyeColor;
+    }
+    public StringProperty getPropHairColor(){
+        StringProperty propHairColor = new SimpleStringProperty();
+        propHairColor.setValue(hairColor.toString());
+        return propHairColor;
+    }
+    public DoubleProperty getPropHeight(){
+        DoubleProperty propHeight = new SimpleDoubleProperty();
+        propHeight.setValue(height);
+        return propHeight;
+    }
+    public StringProperty getPropNationality(){
+        StringProperty propNationality = new SimpleStringProperty();
+        propNationality.setValue(nationality.toString());
+        return propNationality;
+    }
+    public StringProperty getPropCreator(){
+        StringProperty propCreator = new SimpleStringProperty();
+        propCreator.setValue(creator);
+        return propCreator;
+    }
+
 
 
     public void setName(String name_) {

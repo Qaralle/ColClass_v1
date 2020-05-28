@@ -1,5 +1,7 @@
 package packet;
 
+import javafx.beans.property.*;
+
 import java.io.Serializable;
 
 /**
@@ -29,8 +31,20 @@ public class Coordinates implements Comparable<Coordinates>, Serializable {
         return x;
     }
 
+    public FloatProperty getPropX(){
+        FloatProperty propX = new SimpleFloatProperty();
+        propX.setValue(x);
+        return propX;
+    }
+
     public Double getY(){
         return y;
+    }
+
+    public DoubleProperty getPropY(){
+        DoubleProperty propY = new SimpleDoubleProperty();
+        propY.setValue(y);
+        return propY;
     }
 
     /**
