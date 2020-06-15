@@ -18,13 +18,15 @@ public class BDconnector {
     private String strSshHost = "se.ifmo.ru"; // hostname or ip or SSH server
     private int nSshPort = 2222; // remote SSH host port number
     private String strRemoteHost = "pg"; // hostname or ip of your database server
-    private int nLocalPort = 3746; // local port number use to bind SSH tunnel
+    private int nLocalPort = 5558; // local port number use to bind SSH tunnel
     private int nRemotePort = 5432; // remote port number of your database
     private String strDbUser = "s283809"; // database loging username
     private String strDbPassword = "hzn178"; // database login password
     private Connection con;
 
-    {
+    public BDconnector(int nLocalPort) {
+        this.nLocalPort = nLocalPort;
+
         try {
             this.doSshTunnel(strSshUser, strSshPassword, strSshHost, nSshPort, strRemoteHost, nLocalPort, nRemotePort);
         } catch (JSchException e) {
@@ -36,7 +38,7 @@ public class BDconnector {
             e.printStackTrace();
         }
         try {
-            this.con = DriverManager.getConnection("jdbc:postgresql://localhost:"+nLocalPort+"/studs", strDbUser, strDbPassword);
+            this.con = DriverManager.getConnection("jdbc:postgresql://localhost:" + nLocalPort + "/studs", strDbUser, strDbPassword);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -44,29 +46,33 @@ public class BDconnector {
 
     /**
      * Создание SSH туннеля для подключения к БД
-     * @param strSshUser Имя пользователя
+     *
+     * @param strSshUser     Имя пользователя
      * @param strSshPassword Пароль пользователя
-     * @param strSshHost имя хоста сервера
-     * @param nSshPort Порт для подключения
-     * @param strRemoteHost Название хоста
-     * @param nLocalPort Локальный порт для подключения к туннелю
-     * @param nRemotePort Порт вашей БД
+     * @param strSshHost     имя хоста сервера
+     * @param nSshPort       Порт для подключения
+     * @param strRemoteHost  Название хоста
+     * @param nLocalPort     Локальный порт для подключения к туннелю
+     * @param nRemotePort    Порт вашей БД
      */
-    private void doSshTunnel( String strSshUser, String strSshPassword, String strSshHost, int nSshPort, String strRemoteHost, int nLocalPort, int nRemotePort ) throws JSchException
-    {
+    private void doSshTunnel(String strSshUser, String strSshPassword, String strSshHost, int nSshPort, String strRemoteHost, int nLocalPort, int nRemotePort) throws JSchException {
         final JSch jsch = new JSch();
-        Session session = jsch.getSession( strSshUser, strSshHost, nSshPort );
-        session.setPassword( strSshPassword );
+        Session session = jsch.getSession(strSshUser, strSshHost, nSshPort);
+        session.setPassword(strSshPassword);
 
         final Properties config = new Properties(); //Properties – это подкласс Hashtable. Он используется для хранения списков значени
-        config.put( "StrictHostKeyChecking", "no" ); //отключаем запрос о доверие серверу
-        session.setConfig( config );
+        config.put("StrictHostKeyChecking", "no"); //отключаем запрос о доверие серверу
+        session.setConfig(config);
 
         session.connect();
         session.setPortForwardingL(nLocalPort, strRemoteHost, nRemotePort); //регестрирует переадресацию локального порта для обмена связями
     }
-    public Connection getCon(){
+
+    public Connection getCon() {
         return con;
     }
-    public void CloseCon() throws SQLException {this.con.close();}
+
+    public void CloseCon() throws SQLException {
+        this.con.close();
+    }
 }

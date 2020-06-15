@@ -204,6 +204,50 @@ public class CommandA implements Serializable {
 
     }
 
+    public void setStringTOsend(){
+        stringToSend  = "="+"name"+"="+name+"="+
+                "height"+"="+height+"="+
+                "eyeColor"+"="+eyeColor+"="+
+                "hairColor"+"="+hairColor+"="+
+                "x"+"="+x+"="+
+                "x1"+"="+x1+"="+
+                "y"+"="+y+"="+
+                "y1"+"="+y1+"="+
+                "nationality"+"="+nationality+"="+
+                "name1"+"="+location;
+    }
+
+    public void setName(String name_){
+        name=name_;
+    }
+    public void setHeight(Double height_){
+        height=height_;
+    }
+    public void setEyeColor(Color eyeColor_){
+        eyeColor=eyeColor_;
+    }
+    public void setHairColor(Color hairColor_){
+        hairColor=hairColor_;
+    }
+    public void setNationality(Country nationality_){
+        nationality=nationality_;
+    }
+    public void setX(Float x_){
+        x=x_;
+    }
+    public void setX1(Float x1_){
+        x1=x1_;
+    }
+    public void setY(Double y_){
+        y=y_;
+    }
+    public void setY1(Double y1_){
+        y1=y1_;
+    }
+    public void setLocation(String location_){
+        location=location_;
+    }
+
     public String getStringToSend(){ return stringToSend;}
     public long getId() { return id; }
     public String getName() { return name; }
